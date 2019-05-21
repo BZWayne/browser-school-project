@@ -1,0 +1,4 @@
+procedure TForm1.Exit1Click(Sender: TObject);
+begin
+Form1.Close;
+end;
