@@ -1,0 +1,195 @@
+unit Unit1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, Buttons, ExtCtrls, Menus, OleCtrls, SHDocVw, ComCtrls,
+  Spin, ColorGrd, ExtDlgs, HTTPApp, ComObj;
+
+type
+  TForm1 = class(TForm)
+    Panel1: TPanel;
+    BitBtn1: TBitBtn;
+    BitBtn2: TBitBtn;
+    BitBtn3: TBitBtn;
+    BitBtn4: TBitBtn;
+    BitBtn5: TBitBtn;
+    BitBtn6: TBitBtn;
+    Panel2: TPanel;
+    Label1: TLabel;
+    Edit1: TEdit;
+    BitBtn7: TBitBtn;
+    MainMenu1: TMainMenu;
+    N1: TMenuItem;
+    Timer1: TTimer;
+    Label2: TLabel;
+    Save1: TMenuItem;
+    History1: TMenuItem;
+    Exit1: TMenuItem;
+    Help1: TMenuItem;
+    about1: TMenuItem;
+    Panel3: TPanel;
+    PageControl1: TPageControl;
+    TabSheet1: TTabSheet;
+    WebBrowser1: TWebBrowser;
+    TabSheet2: TTabSheet;
+    WebBrowser2: TWebBrowser;
+    SpeedButton1: TSpeedButton;
+    SpeedButton3: TSpeedButton;
+    SpeedButton4: TSpeedButton;
+    ComboBox1: TComboBox;
+    OpenDialog1: TOpenDialog;
+    SaveDialog1: TSaveDialog;
+    procedure BitBtn1Click(Sender: TObject);
+    procedure BitBtn2Click(Sender: TObject);
+    procedure BitBtn3Click(Sender: TObject);
+    procedure BitBtn4Click(Sender: TObject);
+    procedure BitBtn5Click(Sender: TObject);
+    procedure BitBtn6Click(Sender: TObject);
+    procedure BitBtn7Click(Sender: TObject);
+    procedure Edit1Change(Sender: TObject);
+    procedure Timer1Timer(Sender: TObject);
+    procedure Exit1Click(Sender: TObject);
+    procedure Edit1KeyPress(Sender: TObject; var Key: Char);
+    procedure WebBrowser1NewWindow2(Sender: TObject; var ppDisp: IDispatch;
+      var Cancel: WordBool);
+    procedure SpeedButton1Click(Sender: TObject);
+    procedure SpeedButton3Click(Sender: TObject);
+    procedure SpeedButton4Click(Sender: TObject);
+    procedure ComboBox1Change(Sender: TObject);
+    procedure Save1Click(Sender: TObject);
+    procedure History1Click(Sender: TObject);
+    procedure Panel2Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form1: TForm1;
+
+implementation
+
+{$R *.dfm}
+
+procedure TForm1.BitBtn1Click(Sender: TObject);
+begin
+webbrowser1.GoBack;     //íàçàä
+webbrowser2.GoBack;
+end;
+
+procedure TForm1.BitBtn2Click(Sender: TObject);
+begin
+webbrowser1.GoForward;      //âïåðåä
+webbrowser2.GoForward
+end;
+
+procedure TForm1.BitBtn3Click(Sender: TObject);
+begin
+webbrowser1.Stop;         //ñòîï
+webbrowser2.Stop;
+end;
+
+procedure TForm1.BitBtn4Click(Sender: TObject);
+begin
+webbrowser1.refresh;     //îáíîâèòü áðàóçåð
+end;
+
+procedure TForm1.BitBtn5Click(Sender: TObject);
+begin
+webbrowser1.GoHome;         //äîìîé
+webbrowser2.Gohome;
+end;
+
+procedure TForm1.BitBtn6Click(Sender: TObject);
+begin
+form1.Close;        //çàêðûòü áðàóçåð
+end;
+
+procedure TForm1.BitBtn7Click(Sender: TObject);
+begin
+webbrowser1.GoSearch;   //ïîèñê ìàòåðèàëà
+webbrowser2.GoSearch;
+end;
+
+procedure TForm1.Edit1Change(Sender: TObject);
+begin
+webbrowser1.Navigate(edit1.Text);  //íàçâàíèå ñàéòà
+webbrowser2.Navigate('www.facebook.com' + edit1.text);
+webbrowser2.Navigate('www.twitter.com' + edit1.text);
+webbrowser2.Navigate('www.youtube.com' + edit1.text);
+end;
+
+procedure TForm1.Timer1Timer(Sender: TObject);
+begin
+label2.Caption:=timetostr(time);
+end;
+
+procedure TForm1.Exit1Click(Sender: TObject);
+begin
+Form1.Close;
+end;
+
+procedure TForm1.Edit1KeyPress(Sender: TObject; var Key: Char);
+begin
+if key=char(13) then webbrowser1.navigate(edit1.text);
+if key=char(13) then webbrowser2.Navigate(edit1.text);
+end;
+
+procedure TForm1.WebBrowser1NewWindow2(Sender: TObject;
+  var ppDisp: IDispatch; var Cancel: WordBool);
+begin
+ppdisp:=webbrowser2.defaultdispatch;
+end;
+
+procedure TForm1.SpeedButton1Click(Sender: TObject);
+begin
+webbrowser2.Navigate('https://www.facebook.com/' + edit1.Text);
+webbrowser1.Navigate('https://www.facebook.com/' + edit1.Text);
+end;
+
+procedure TForm1.SpeedButton3Click(Sender: TObject);
+begin
+webbrowser2.Navigate('https://www.twitter.com/' + edit1.Text);
+webbrowser1.Navigate('https://www.twitter.com/' + edit1.Text);
+end;
+
+procedure TForm1.SpeedButton4Click(Sender: TObject);
+begin
+webbrowser2.Navigate('www.youtube.com/' + edit1.Text);
+webbrowser1.Navigate('www.youtube.com/' + edit1.Text);
+end;
+
+procedure TForm1.ComboBox1Change(Sender: TObject);
+begin
+if combobox1.ItemIndex=0 then webbrowser1.Navigate('www.yandex.ru' + edit1.text);
+if combobox1.ItemIndex=1 then webbrowser1.Navigate('www.nis.edu.kz' + edit1.text);
+if combobox1.ItemIndex=2 then webbrowser1.navigate('www.nu.edu.kz' + edit1.Text);
+if combobox1.ItemIndex=3 then webbrowser1.navigate('www.voa.com' + edit1.Text);
+if combobox1.ItemIndex=4 then webbrowser1.navigate('www.facebook.com' + edit1.Text);
+if combobox1.ItemIndex=5 then webbrowser1.navigate('www.youtube.com' + edit1.Text);
+if combobox1.ItemIndex=6 then webbrowser1.navigate('https://vk.com' + edit1.Text);
+if combobox1.itemindex=6 then webbrowser2.Navigate('https://vk.com' + edit1.text);
+end;
+
+procedure TForm1.Save1Click(Sender: TObject);
+begin
+OpenDialog1.Execute;
+
+end;
+
+procedure TForm1.History1Click(Sender: TObject);
+begin
+savedialog1.Execute;
+end;
+
+procedure TForm1.Panel2Click(Sender: TObject);
+begin
+
+end;
+
+end.
+
+
