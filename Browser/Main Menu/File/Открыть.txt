@@ -1,0 +1,12 @@
+procedure TForm1.Save1Click(Sender: TObject);
+begin
+OpenDialog1.Execute;
+
+end;
+
+procedure TForm1.History1Click(Sender: TObject);
+begin
+savedialog1.Execute;
+end;
+
+end.
